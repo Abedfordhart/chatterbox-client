@@ -1,15 +1,17 @@
 var App = function () {
-  this.server = 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages'
+  this.server = 'http://parse.sfm8.hackreactor.com/chatterbox/classes/lobby'
 };
 
 App.prototype.init = function() {
+  app.fetch();
+  app.clearMessages();
 };
 
 App.prototype.send = function(message) {
 
   $.ajax({
   // This is the url you should use to communicate with the parse API server.
-  url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/messages',
+  url: 'http://parse.sfm8.hackreactor.com/chatterbox/classes/lobby',
   type: 'POST',
   data: JSON.stringify(message),
   contentType: 'application/json',
@@ -42,8 +44,6 @@ App.prototype.renderMessage = function(message) {
   var $user = $('<div class = "username"></div>');
   var $msg = $('<div></div>');
   var $chat = $('<div class = "chat"></div>');
-  console.log(message.username)
-  console.log(message.text)
   $user.html(escapeRegExp(message.username));
   $msg.html(escapeRegExp(message.text));
   $chat.append($user);
@@ -52,7 +52,10 @@ App.prototype.renderMessage = function(message) {
 
 };
 
-App.prototype.renderRoom = function() {
+App.prototype.renderRoom = function(roomName) {
+  var $room = $('<option></option>');
+  $room.text(roomName);
+  $("#roomSelect").append($room);
 };
 
 function escapeRegExp(str) {
@@ -65,15 +68,20 @@ function escapeRegExp(str) {
 
 $(document).ready(function() {
   
-  $('#submit').on('click',function(event){
-    app.send();
-    app.fetch();
+  $('#submit').on('click', (event) => {
+    var $input = $("#input").val()
+    var msg = {
+      username: window.location.search.slice(10), 
+      text: $input, 
+      roomname: 'lobby'
+    };
+    app.send(msg);
   });
 
-  // $(document).on("pageload",function(){
-  //   app.fetch();
-  // });
-
 });
+
+setInterval(function(){
+  app.init();
+}, 1000)
 
 var app = new App();
