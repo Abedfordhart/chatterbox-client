@@ -26,6 +26,10 @@ body {
     font-style:italic;
 }
 
+.room {
+    display: block;
+}
+
 #main ul {
     padding-left: 20px;
 }
