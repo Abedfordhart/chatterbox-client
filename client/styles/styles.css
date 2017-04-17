@@ -26,10 +26,6 @@ body {
     font-style:italic;
 }
 
-.room {
-    display: block;
-}
-
 #main ul {
     padding-left: 20px;
 }
@@ -91,4 +87,3 @@ form input[type=text] {
     color: #fff;
     background-color: #0090da;
 }
-

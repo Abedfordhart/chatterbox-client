@@ -7,7 +7,6 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
-    <srcipt src ="bower_components/underscore/dist/jquery.js"></srcipt>
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
@@ -17,7 +16,7 @@
         }
         newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
         window.location.search = newSearch;
-      };
+      }
     </script>
     <!-- your scripts -->
     <script src="env/config.js"></script>
@@ -27,21 +26,22 @@
     <div id="main">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
-      <div class = "room">
-        <h3>Room:
-        <select id="roomSelect" name="New Room...">
-          <option value="Lobby">Lobby</option>
-      </div><br>
-      <div>
-        <form>
-        <input id="input" type="text">
-        <input id="submit" type="submit" value="Submit">
-        </form>
+
+      <div class="spinner"><img src="images/spiffygif_46x46.gif"></div>
+      <div id="rooms">
+        Room:
+        <select id="roomSelect">
+        </select>
       </div>
-    </div>
-    <div id="chats">
-     <br>
-    </div>
-  </select>
-  </body>
+      <form action="#" id="send" method="post">
+        <input type="text" name="message" id="message"/>
+        <input type="submit" name="submit" class="submit"/>
+      </form>    </div>
+    <div id="chats"></div>
+
+    <script>
+      $(function(){
+        app.init()
+      });
+    </script>  </body>
 </html>
